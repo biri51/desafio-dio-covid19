@@ -2,36 +2,33 @@ import React from 'react';
 import { Typography, Grid } from '@material-ui/core';
 import CardComponent from './Card/Card';
 import styles from './Cards.module.css';
+import { Countries } from '../CountryPicker/CountryPicker.jsx'
 
-const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
+
+const Info = ({ data: { confirmed, deaths, lastUpdate } }) => {
   if (!confirmed) {
     return 'Loading...';
   }
 
+  let update = new Date(lastUpdate)
+
   return (
     <div className={styles.container}>
-        <Typography gutterBottom variant="h4" component="h2">Global</Typography>
-      <Grid container spacing={3} justify="center">
+        <Typography gutterBottom variant="h4" component="h2"></Typography>
+      <Grid container spacing={2} justify="center">
         <CardComponent
           className={styles.infected}
-          cardTitle="Infected"
+          cardTitle="Infectados"
           value={confirmed.value}
-          lastUpdate={lastUpdate}
-          cardSubtitle="Number of active cases from COVID-19."
-        />
-        <CardComponent
-          className={styles.recovered}
-          cardTitle="Recovered"
-          value={recovered.value}
-          lastUpdate={lastUpdate}
-          cardSubtitle="Number of recoveries from COVID-19."
+          lastUpdate={update}
+          cardSubtitle="Casos totais de COVID-19"
         />
         <CardComponent
           className={styles.deaths}
-          cardTitle="Deaths"
+          cardTitle="Mortes"
           value={deaths.value}
-          lastUpdate={lastUpdate}
-          cardSubtitle="Number of deaths caused by COVID-19."
+          lastUpdate={update}
+          cardSubtitle="Número de mortos por COVID-19"
         />
       </Grid>
     </div>
